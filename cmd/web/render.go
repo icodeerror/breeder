@@ -22,21 +22,21 @@ func (app *application) render(w http.ResponseWriter, t string, data *templateDa
 	if tmpl == nil {
 		newTemplate, err := app.buildTemplateFromDisk(t)
 		if err != nil {
-			log.Panicln("Error building template:", err)
+			log.Println("Error building template:", err)
 			return
 		}
 
-		log.Panicln("Building template from disk")
+		log.Println("Building template from disk")
 
 		tmpl = newTemplate
 	}
 
-	// if data == nil {
-	// 	data = &templateData{}
-	// }
+	if data == nil {
+		data = &templateData{}
+	}
 
 	if err := tmpl.ExecuteTemplate(w, t, data); err != nil {
-		log.Panicln("Executing template:", err)
+		log.Println("Executing template:", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 

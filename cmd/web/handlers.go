@@ -1,10 +1,7 @@
 package main
 
-import (
-	"fmt"
-	"net/http"
-)
+import "net/http"
 
 func (app *application) ShowHome(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello")
+	app.render(w, "home.page.html", nil)
 }
